@@ -12,14 +12,9 @@ NodeControl::~NodeControl()
 }
 
 
-void NodeControl::initRMaster() {
+void NodeControl::initRosMaster() {
 	std::cout << "Connecting to server at " << m_ros_master << std::endl;
 	m_nh.initNode(m_ros_master);
-}
-
-void NodeControl::subscriber() {
-	/*ros::Subscriber<std_msgs::String> command_sub("chatter", &NodeControl::initRMaster);
-	m_nh.subscribe(command_sub);*/
 }
 
 void NodeControl::listener() {
@@ -30,6 +25,9 @@ void NodeControl::listener() {
 	}
 }
 
-void NodeControl::callback(const std_msgs::String &msg) {
+std_msgs::String NodeControl::callback(const std_msgs::String &msg) {
 	std::cout << "Message received: " << msg.data << std::endl;
+	std_msgs::String ros_str;
+	ros_str.data = "It's works!";
+	return ros_str;
 }
