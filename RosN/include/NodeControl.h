@@ -9,10 +9,10 @@ class NodeControl
 public:
 	NodeControl(char *master_ip);
 	~NodeControl();
-	void initRosMaster();
+	/*void initRosMaster();
 	ros::NodeHandle m_nh;
 	void listener();
-	std_msgs::String callback(const std_msgs::String & msg);
+	std_msgs::String callback(const std_msgs::String & msg);*/
 private:
 	//char ros_master[] = "10.88.28.14";
 	char *m_ros_master;
