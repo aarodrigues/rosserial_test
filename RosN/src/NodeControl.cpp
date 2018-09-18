@@ -21,15 +21,18 @@ void NodeControl::initRosMaster() {
 }
 
 void NodeControl::listener() {
-	/*acknowledging.data = "Connection established";
+	acknowledging.data = "true";
 	ros::Publisher ack_pub("/qm_hyspex_controller/confirm_start_hyspex", &acknowledging);
-	m_nh.advertise(ack_pub);*/
+	m_nh.advertise(ack_pub);
 
 	while (true)
 	{
 		if (synch) {
-			if (!ack)
-				std::cout << "Connection established " << std::endl; //ack_pub.publish(&acknowledging);
+			if (!ack) {
+				//std::cout << "Connection established " << std::endl; 
+				ack_pub.publish(&acknowledging);
+
+			}
 		}
 		m_nh.spinOnce();
 		Sleep(100);
