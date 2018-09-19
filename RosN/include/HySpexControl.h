@@ -1,14 +1,19 @@
+
 #pragma once
+#include <iostream>
+#include "HySpex.h"
+
 class HySpexControl
 {
 public:
 	HySpexControl();
 	~HySpexControl();
 	//Geonosis Object
+	std::unique_ptr<HySpex> hySpex_;
 
 	void movePitch(int degree);
 	void moveYaw(int degree);
-	void detectCamera();
+	std::string detectCamera();
 	void detectStages();
 	void startAquisition();
 	void stopAquisition();
@@ -23,6 +28,8 @@ public:
 	void setFramePeriod(int period);
 	void setReturnSpeed(int speed);
 	void setPrimaryCam(int id);
+	void getLog();
+	void getPanTilt();
 
 };
 

@@ -2,11 +2,16 @@
 #include<iostream>
 #include <windows.h>
 
-NodeControl::NodeControl(char *master_ip): 
+NodeControl::NodeControl(char *master_ip) :
 	m_ros_master(master_ip),
-	synch(false),
-	ack(false)
+	synch_(false),
+	ack_(false),
+	hyspex_control_(std::unique_ptr<HySpexControl>(new HySpexControl())),
+	enable_angle_(true),
+	enable_status_(true),
+	enable_perpetual_publishing_(false)
 {
+
 }
 
 
@@ -17,24 +22,40 @@ NodeControl::~NodeControl()
 
 void NodeControl::initRosMaster() {
 	std::cout << "Connecting to server at " << m_ros_master << std::endl;
-	m_nh.initNode(m_ros_master);
+	nh_.initNode(m_ros_master);
 }
 
 void NodeControl::listener() {
-	acknowledging.data = "true";
-	ros::Publisher ack_pub("/qm_hyspex_controller/confirm_start_hyspex", &acknowledging);
-	m_nh.advertise(ack_pub);
+	acknowledging_.data = "true";
+
+	ros::Publisher ack_pub("/qm_hyspex_controller/confirm_start_hyspex", &acknowledging_);
+	nh_.advertise(ack_pub);
+
+	ros::Publisher pantilt_pub("/qm_hyspex_controller/angles_pantilt", &angles_);
+	nh_.advertise(pantilt_pub);
+
+	ros::Publisher status_pub("/qm_hyspex_controller/checking_status_hyspex", &status_);
+	nh_.advertise(status_pub);
 
 	while (true)
 	{
-		if (synch) {
-			if (!ack) {
-				//std::cout << "Connection established " << std::endl; 
-				ack_pub.publish(&acknowledging);
-
+		if (synch_) {
+			if (!ack_) {
+				ack_pub.publish(&acknowledging_);
+				enable_perpetual_publishing_ = true;
+			}
+			if (enable_perpetual_publishing_ && enable_angle_) {
+				std::string str = hyspex_control_->detectCamera();
+				angles_.data = str.c_str();
+				pantilt_pub.publish(&angles_);
+			}
+			if (enable_perpetual_publishing_ && enable_status_) {
+				std::string str = hyspex_control_->detectCamera();
+				status_.data = str.c_str();
+				status_pub.publish(&status_);
 			}
 		}
-		m_nh.spinOnce();
+		nh_.spinOnce();
 		Sleep(100);
 	}
 }
@@ -45,3 +66,5 @@ std_msgs::String NodeControl::callback(const std_msgs::String &msg) {
 	ros_str.data = "It's works!";
 	return ros_str;
 }
+
+

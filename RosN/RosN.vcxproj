@@ -35,6 +35,11 @@
     <ClCompile Include="src\RosN.cpp" />
     <ClCompile Include="src\stdafx.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\HySpex_Mock\HySpex_Mock\HySpex_Mock.vcxproj">
+      <Project>{2a5b4e31-7d8d-4e07-a585-374978ecd282}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{50620BDF-B272-4AC9-B065-3A32961BC72F}</ProjectGuid>
