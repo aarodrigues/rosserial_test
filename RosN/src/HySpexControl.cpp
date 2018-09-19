@@ -22,9 +22,9 @@ void HySpexControl::moveYaw(int degree)
 	hySpex_->moveYaw(degree);
 }
 
-std::string HySpexControl::detectCamera()
+void HySpexControl::detectCamera()
 {
-	return hySpex_->detectCamera();
+	hySpex_->detectCamera();
 }
 
 void HySpexControl::detectStages() 
@@ -97,11 +97,11 @@ void HySpexControl::setPrimaryCam(int id)
 	hySpex_->setPrimaryCam(id);
 }
 
-void HySpexControl::getLog() 
+std::string HySpexControl::getLog()
 {
-	hySpex_->getLog();
+	return hySpex_->getLog();
 }
-void HySpexControl::getPanTilt() 
+std::string HySpexControl::getPanTilt()
 {
-	hySpex_->getPanTilt();
+	return hySpex_->getPanTilt();
 }

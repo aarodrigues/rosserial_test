@@ -13,7 +13,7 @@ public:
 
 	void movePitch(int degree);
 	void moveYaw(int degree);
-	std::string detectCamera();
+	void detectCamera();
 	void detectStages();
 	void startAquisition();
 	void stopAquisition();
@@ -28,8 +28,8 @@ public:
 	void setFramePeriod(int period);
 	void setReturnSpeed(int speed);
 	void setPrimaryCam(int id);
-	void getLog();
-	void getPanTilt();
+	std::string getLog();
+	std::string getPanTilt();
 
 };
 

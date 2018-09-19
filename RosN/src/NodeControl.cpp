@@ -44,12 +44,12 @@ void NodeControl::listener() {
 				enable_perpetual_publishing_ = true;
 			}
 			if (enable_perpetual_publishing_ && enable_angle_) {
-				std::string str = hyspex_control_->detectCamera();
+				std::string str = hyspex_control_->getPanTilt();
 				angles_.data = str.c_str();
 				pantilt_pub.publish(&angles_);
 			}
 			if (enable_perpetual_publishing_ && enable_status_) {
-				std::string str = hyspex_control_->detectCamera();
+				std::string str = hyspex_control_->getLog();
 				status_.data = str.c_str();
 				status_pub.publish(&status_);
 			}
