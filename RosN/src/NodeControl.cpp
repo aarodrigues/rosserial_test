@@ -3,7 +3,7 @@
 #include <windows.h>
 
 NodeControl::NodeControl(char *master_ip) :
-	m_ros_master(master_ip),
+	m_ros_master_(master_ip),
 	synch_(false),
 	ack_(false),
 	hyspex_control_(std::unique_ptr<HySpexControl>(new HySpexControl())),
@@ -11,7 +11,6 @@ NodeControl::NodeControl(char *master_ip) :
 	enable_status_(true),
 	enable_perpetual_publishing_(false)
 {
-
 }
 
 
@@ -21,20 +20,20 @@ NodeControl::~NodeControl()
 
 
 void NodeControl::initRosMaster() {
-	std::cout << "Connecting to server at " << m_ros_master << std::endl;
-	nh_.initNode(m_ros_master);
+	std::cout << "Connecting to server at " << m_ros_master_ << std::endl;
+	nh_.initNode(m_ros_master_);
 }
 
 void NodeControl::listener() {
 	acknowledging_.data = "true";
 
-	ros::Publisher ack_pub("/qm_hyspex_controller/confirm_start_hyspex", &acknowledging_);
+	ros::Publisher ack_pub(CONFIRM_START, &acknowledging_);
 	nh_.advertise(ack_pub);
 
-	ros::Publisher pantilt_pub("/qm_hyspex_controller/angles_pantilt", &angles_);
+	ros::Publisher pantilt_pub(ANGLES_PANTILT, &angles_);
 	nh_.advertise(pantilt_pub);
 
-	ros::Publisher status_pub("/qm_hyspex_controller/checking_status_hyspex", &status_);
+	ros::Publisher status_pub(STATUS, &status_);
 	nh_.advertise(status_pub);
 
 	while (true)
