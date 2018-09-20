@@ -9,7 +9,7 @@ NodeControl::NodeControl(char *master_ip) :
 	hyspex_control_(std::unique_ptr<HySpexControl>(new HySpexControl())),
 	enable_angle_(true),
 	enable_status_(true),
-	enable_perpetual_publishing_(false)
+	enable_publishing_(false)
 {
 }
 
@@ -41,14 +41,14 @@ void NodeControl::listener() {
 		if (synch_) {
 			if (!ack_) {
 				ack_pub.publish(&acknowledging_);
-				enable_perpetual_publishing_ = true;
+				enable_publishing_ = true;
 			}
-			if (enable_perpetual_publishing_ && enable_angle_) {
+			if (enable_publishing_ && enable_angle_) {
 				std::string str = hyspex_control_->getPanTilt();
 				angles_.data = str.c_str();
 				pantilt_pub.publish(&angles_);
 			}
-			if (enable_perpetual_publishing_ && enable_status_) {
+			if (enable_publishing_ && enable_status_) {
 				std::string str = hyspex_control_->getLog();
 				status_.data = str.c_str();
 				status_pub.publish(&status_);
@@ -61,6 +61,12 @@ void NodeControl::listener() {
 
 std_msgs::String NodeControl::callback(const std_msgs::String &msg) {
 	std::cout << "Message received: " << msg.data << std::endl;
+	std::string command = msg.data;
+
+	if (command.compare("start") == 0) {
+		hyspex_control_->startAquisition();
+	}
+
 	std_msgs::String ros_str;
 	ros_str.data = "It's works!";
 	return ros_str;
