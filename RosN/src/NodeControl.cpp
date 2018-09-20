@@ -55,8 +55,10 @@ bool NodeControl::loadParameters() {
 }
 
 void NodeControl::initRosMaster() {
+	/* Convert std::string to char* */
 	std::vector<char> writable(ros_ip_.begin(), ros_ip_.end());
 	writable.push_back('\0');
+	/* set ROS master ip */
 	ros_master_ = &*writable.begin();
 	std::cout << "Connecting to server at " << ros_master_ << std::endl;
 	nh_.initNode(ros_master_);
