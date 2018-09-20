@@ -37,6 +37,9 @@ bool NodeControl::loadParameters() {
 	json jconfig;
 	bool success = jsonConfig(jconfig);
 
+	if (!success)
+		return success;
+
 	/* Configure ros master ip from json file */
 	ros_ip_ = jconfig["ros_master_ip"].get<json>()["IP"].get<std::string>();
 
