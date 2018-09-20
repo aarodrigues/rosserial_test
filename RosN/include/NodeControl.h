@@ -5,45 +5,46 @@
 #include "std_msgs/String.h"
 #include "HySpexControl.h"
 
-//namespace ros_topic {
-//	const char *ANGLES_PANTILT = "/qm_hyspex_controller/angles_pantilt";
-//	const char *CONFIRM_START = "/qm_hyspex_controller/confirm_start_hyspex";
-//	const char *START = "/qm_hyspex_controller/start_hyspex";
-//	const char *SECOND_CONFIRMATION = "/qm_hyspex_controller/2step_confirmation_start_hyspex";
-//	const char *STATUS = "/qm_hyspex_controller/checking_status_hyspex";
-//};
+#include <nlohmann/json.hpp>
+#include <fstream>
+
+using json = nlohmann::json;
 
 class NodeControl
 {
 public:
-	NodeControl(char *master_ip);
+	NodeControl();
 	~NodeControl();
 	void initRosMaster();
 	void listener();
 	std_msgs::String callback(const std_msgs::String & msg);
+	bool jsonConfig(json &jconfig);
+	bool loadParameters();
 
 	ros::NodeHandle nh_;
 	bool synch_;
 	bool ack_;
 	std::unique_ptr<HySpexControl> hyspex_control_;
 
-
-	const char *ANGLES_PANTILT = "/qm_hyspex_controller/angles_pantilt";
-	const char *CONFIRM_START = "/qm_hyspex_controller/confirm_start_hyspex";
-	const char *START = "/qm_hyspex_controller/start_hyspex";
-	const char *SECOND_CONFIRMATION = "/qm_hyspex_controller/2step_confirmation_start_hyspex";
-	const char *STATUS = "/qm_hyspex_controller/checking_status_hyspex";
-	const char *COMMAND = "/qm_hyspex_controller/qm_hyspex_command";
+	std::string start_topic_;
+	std::string angles_pantilt_topic_;
+	std::string confirm_start_topic_;
+	std::string second_confirmation_topic_;
+	std::string status_topic_;
+	std::string command_topic_;
 
 private:
-	char *m_ros_master_;
+	char *ros_master_;
+	std::string ros_ip_;
 	std_msgs::String acknowledging_;
-	std_msgs::String status_;
+	std_msgs::String log_;
 	std_msgs::String angles_;
 
 	bool enable_angle_;
 	bool enable_status_;
 	bool enable_publishing_;
+
+	std::string start_cmd_;
 
 };
 

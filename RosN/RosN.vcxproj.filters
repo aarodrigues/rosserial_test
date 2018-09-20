@@ -33,6 +33,9 @@
     <ClInclude Include="include\NodeControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\nlohmann\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\RosN.cpp">

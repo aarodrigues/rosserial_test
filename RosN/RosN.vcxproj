@@ -22,6 +22,7 @@
     <ClInclude Include="..\ros_lib\ros.h" />
     <ClInclude Include="..\ros_lib\WindowsSocket.h" />
     <ClInclude Include="include\HySpexControl.h" />
+    <ClInclude Include="include\nlohmann\json.hpp" />
     <ClInclude Include="include\NodeControl.h" />
     <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\targetver.h" />

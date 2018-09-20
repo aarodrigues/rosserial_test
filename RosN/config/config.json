@@ -1,0 +1,17 @@
+{
+	"ros_master_ip" : {
+		"IP" : "10.88.28.8"
+	},
+    "ros_topics" : {
+	  	"START" : "/qm_hyspex_controller/start_hyspex",
+	    "ANGLES_PANTILT" : "/qm_hyspex_controller/angles_pantilt",
+	    "CONFIRM_START" : "/qm_hyspex_controller/confirm_start_hyspex",
+	    "SECOND_CONFIRMATION" : "/qm_hyspex_controller/2step_confirmation_start_hyspex",
+	    "STATUS" : "/qm_hyspex_controller/checking_status_hyspex",
+	    "COMMAND" : "/qm_hyspex_controller/qm_hyspex_command"
+  	},
+    "geonosis_commands" : {
+    	"START_ACQUISITION" : "start"
+  	}
+  
+}
