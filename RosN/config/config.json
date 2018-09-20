@@ -11,7 +11,23 @@
 	    "COMMAND" : "/qm_hyspex_controller/qm_hyspex_command"
   	},
     "geonosis_commands" : {
-    	"START_ACQUISITION" : "start"
+    	"START_ACQUISITION" : "start",
+    	"STOP_ACQUISITION" : "stop",
+    	"MOVE_PITCH" : "pitch",
+    	"MOVE_YAW" : "yaw",
+    	"DETECT_CAM" : "cam",
+    	"DETEC_STAGE" : "stage",
+    	"SHOW_FRAME_ACQUISITION" : "frameaquisition",
+    	"PANTILT_POS" : "pitchpos",
+    	"SHOW_CAM_ID" : "cam",
+    	"SET_SWEEP_ANGLE" : "angle",
+    	"SET_INITIAL_POS" : "setinitpitchpos",
+    	"SET_OVERLAY_PERCENTAGE" : "setoverlay",
+    	"SET_SCAN_NUM_LINES" : "setlines",
+    	"SET_INTEGRATION_TIME" : "integrationtime",
+    	"SET_FRAME_PERIOD" : "setframeperiod",
+    	"SET_RETURN_SPEED" : "returnspeed",
+    	"SET_PRIMARY_CAM" : "primarycam"
   	}
   
 }

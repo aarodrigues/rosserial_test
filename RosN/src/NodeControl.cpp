@@ -50,6 +50,22 @@ bool NodeControl::loadParameters() {
 
 	/* load command names from json file */
 	start_cmd_ = jconfig["geonosis_commands"].get<json>()["START_ACQUISITION"].get<std::string>();
+	move_pitch_cmd_ = jconfig["geonosis_commands"].get<json>()["MOVE_PITCH"].get<std::string>();
+	move_yaw_cmd_ = jconfig["geonosis_commands"].get<json>()["MOVE_YAW"].get<std::string>();
+	detect_cam_cmd_ = jconfig["geonosis_commands"].get<json>()["DETECT_CAM"].get<std::string>();
+	detect_stages_cmd_ = jconfig["geonosis_commands"].get<json>()["DETEC_STAGE"].get<std::string>();
+	stop_cmd_ = jconfig["geonosis_commands"].get<json>()["STOP_ACQUISITION"].get<std::string>();
+	show_frame_acquisition_cmd_ = jconfig["geonosis_commands"].get<json>()["SHOW_FRAME_ACQUISITION"].get<std::string>();
+	show_pantilt_pos_cmd_ = jconfig["geonosis_commands"].get<json>()["PANTILT_POS"].get<std::string>();
+	show_cam_id_cmd_ = jconfig["geonosis_commands"].get<json>()["SHOW_CAM_ID"].get<std::string>();
+	set_sweep_angle_cmd_ = jconfig["geonosis_commands"].get<json>()["SET_SWEEP_ANGLE"].get<std::string>();
+	set_initial_pos_cmd_ = jconfig["geonosis_commands"].get<json>()["SET_INITIAL_POS"].get<std::string>();
+	set_overlay_percent_cmd_ = jconfig["geonosis_commands"].get<json>()["SET_OVERLAY_PERCENTAGE"].get<std::string>();
+	set_scan_number_lines_cmd_ = jconfig["geonosis_commands"].get<json>()["SET_SCAN_NUM_LINES"].get<std::string>();
+	set_integration_time_cmd_ = jconfig["geonosis_commands"].get<json>()["SET_INTEGRATION_TIME"].get<std::string>();
+	set_frame_period_cmd_ = jconfig["geonosis_commands"].get<json>()["SET_FRAME_PERIOD"].get<std::string>();
+	set_return_speed_cmd_ = jconfig["geonosis_commands"].get<json>()["SET_RETURN_SPEED"].get<std::string>();
+	set_primary_cam_cmd_ = jconfig["geonosis_commands"].get<json>()["SET_PRIMARY_CAM"].get<std::string>();
 
 	return success;
 }
@@ -105,6 +121,70 @@ std_msgs::String NodeControl::callback(const std_msgs::String &msg) {
 
 	if (command.compare(start_cmd_) == 0) {
 		hyspex_control_->startAquisition();
+	}
+
+	if (command.compare(move_pitch_cmd_) == 0) {
+		//hyspex_control_->movePitch();  // need parameters
+	}
+
+	if (command.compare(move_yaw_cmd_) == 0) {
+		//hyspex_control_->moveYaw(); // need parameters
+	}
+
+	if (command.compare(detect_cam_cmd_) == 0) {
+		hyspex_control_->detectCamera();
+	}
+
+	if (command.compare(detect_stages_cmd_) == 0) {
+		hyspex_control_->detectStages();
+	}
+
+	if (command.compare(stop_cmd_) == 0) {
+		hyspex_control_->stopAquisition();
+	}
+
+	if (command.compare(show_frame_acquisition_cmd_) == 0) {
+		hyspex_control_->showFrameAquisition();
+	}
+
+	if (command.compare(show_pantilt_pos_cmd_) == 0) {
+		hyspex_control_->showPanTiltPosition();
+	}
+
+	if (command.compare(show_cam_id_cmd_) == 0) {
+		hyspex_control_->showCamIds();
+	}
+
+	if (command.compare(set_sweep_angle_cmd_) == 0) {
+		//hyspex_control_->setSweepAngle(); // need parameters
+	}
+
+	if (command.compare(set_initial_pos_cmd_) == 0) {
+		//hyspex_control_->setInitialPosition(); // need parameters
+	}
+
+	if (command.compare(set_overlay_percent_cmd_) == 0) {
+		//hyspex_control_->setOverlayPercentage(); // need parameters
+	}
+
+	if (command.compare(set_scan_number_lines_cmd_) == 0) {
+		//hyspex_control_->setScanNumberLines(); // need parameters
+	}
+
+	if (command.compare(set_integration_time_cmd_) == 0) {
+		//hyspex_control_->setInitialPosition(); // need parameters
+	}
+
+	if (command.compare(set_frame_period_cmd_) == 0) {
+		//hyspex_control_->setFramePeriod(); // need parameters
+	}
+
+	if (command.compare(set_return_speed_cmd_) == 0) {
+		//hyspex_control_->setReturnSpeed(); // need parameters
+	}
+
+	if (command.compare(set_primary_cam_cmd_) == 0) {
+		//hyspex_control_->setPrimaryCam(); // need parameters
 	}
 
 	std_msgs::String ros_str;

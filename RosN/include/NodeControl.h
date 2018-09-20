@@ -158,6 +158,22 @@ private:
 
 	/** @brief	Commands from ROS topic */
 	std::string start_cmd_;
+	std::string move_pitch_cmd_;
+	std::string move_yaw_cmd_;
+	std::string detect_cam_cmd_;
+	std::string detect_stages_cmd_;
+	std::string stop_cmd_;
+	std::string show_frame_acquisition_cmd_;
+	std::string show_pantilt_pos_cmd_;
+	std::string show_cam_id_cmd_;
+	std::string set_sweep_angle_cmd_;
+	std::string set_initial_pos_cmd_;
+	std::string set_overlay_percent_cmd_;
+	std::string set_scan_number_lines_cmd_;
+	std::string set_integration_time_cmd_;
+	std::string set_frame_period_cmd_;
+	std::string set_return_speed_cmd_;
+	std::string set_primary_cam_cmd_;
 
 };
 
